@@ -1,10 +1,31 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
+import HomeScreen from './screens/HomeScreen.jsx'
+
+/**
+ * Define application routes.
+ * The App component acts as a layout, and HomeScreen is the default route.
+ */
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App />}>
+      {/* Default route (index) renders HomeScreen */}
+      <Route index element={<HomeScreen />} />
+    </Route>
+  )
+)
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
