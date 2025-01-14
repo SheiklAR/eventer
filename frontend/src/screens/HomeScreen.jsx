@@ -14,6 +14,7 @@ const HomeScreen = () => {
       try {
         const { data } = await axios.get('/api/events'); // Destructure `data` from response
         setEvents(data);
+        console.log(data);
       } catch (error) {
         console.log('fetching error', error.message);
       }

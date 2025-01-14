@@ -9,6 +9,8 @@ import {
 import './index.css'
 import App from './App.jsx'
 import HomeScreen from './screens/HomeScreen.jsx'
+import EventScreen from './screens/EventScreen.jsx'
+
 
 /**
  * Define application routes.
@@ -19,6 +21,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       {/* Default route (index) renders HomeScreen */}
       <Route index element={<HomeScreen />} />
+      <Route path='/event/:id' element={<EventScreen />} />
     </Route>
   )
 )

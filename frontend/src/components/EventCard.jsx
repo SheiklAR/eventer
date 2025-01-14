@@ -1,20 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { formatDateTime } from '../utilities';
 
-// Format date and time
-const formatDateTime = (datetime) => {
-    const dateTimeObj = new Date(datetime);
-    const date = dateTimeObj.toISOString().split('T')[0];
-    const time = dateTimeObj.toTimeString().split(' ')[0];
-    return { date, time };
-  };
 
-const EventCard = ({ image, name, datetime, category }) => {
+const EventCard = ({ _id, image, name, datetime, category }) => {
     const navigate = useNavigate();
     const { date, time } = formatDateTime(datetime);
    
     const handleClick = () => {
-        navigate('#');
+        navigate(`/event/${_id}`);
     }
 
     return (
