@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'Playwrite': ['Playwrite VN', 'sans-serif'],
+        'Poppins': ['Poppins', 'sans-serif'],
       }
     },
   },

@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className="max-w-6xl mx-auto text-3xl font-bold underline">
+      <div className="max-w-6xl mx-auto">
         <Outlet />
       </div>
       <Footer />
