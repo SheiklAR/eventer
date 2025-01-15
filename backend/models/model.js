@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const eventSchema = new mongoose.Schema({
     user: {
@@ -22,6 +23,11 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     events: [eventSchema]
 });
+
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 
 
 const Event = mongoose.model('Event', eventSchema);
