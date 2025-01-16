@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 
 // @desc   Authencticate User
-// @route  GET api/users/login
+// @route  POST api/users/login
 // @access Public
 const authUser = async (req, res) => {
     const { email, password } = req.body;
@@ -38,10 +38,26 @@ const authUser = async (req, res) => {
         }
     
     } else {
-        throw new Error("User not found");
+        res.status(404);
+        res.send("User not found");
         
     }
 };
+
+
+// @desc   Logout User and empty the cookie
+// @route  POST api/users/logout
+// @access PRIVATE
+const logOutUser = asyncHandler(async (req, res) => {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+
+    res.status(200).json({ message: "Logged out" });
+})
+
+
 
 // @desc   Register User
 // @route  POST api/users/register
@@ -55,4 +71,8 @@ const registerUser = async (req, res) => {
 }
 
 
-export { authUser, registerUser };
+export {
+    authUser,
+    registerUser,
+    logOutUser
+};
