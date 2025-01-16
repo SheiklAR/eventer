@@ -1,6 +1,7 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
 import { User } from "../models/model.js";
 import jwt from "jsonwebtoken";
+import generateToken from "../utils/generateToken.js";
 
 
 // @desc   Authencticate User
@@ -13,19 +14,8 @@ const authUser = async (req, res) => {
     
     if (user) {
         if (await user.matchPassword(password)) {
-
-            // Create json web token
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-                expiresIn: "30d",
-            });
-
-            // Set token as http-only cookie
-            res.cookie("jwt", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== "development",
-                sameSite: "strict",
-                maxAge: 30 * 24 * 60 * 60 * 1000,
-            });
+            // Generate Token
+            generateToken(res, user._id);
             
             res.json({
                 _id: user._id,
@@ -62,14 +52,35 @@ const logOutUser = asyncHandler(async (req, res) => {
 // @desc   Register User
 // @route  POST api/users/register
 // @access Private
-const registerUser = async (req, res) => {
-    const { email, password } = req.body;
+const registerUser = asyncHandler(async (req, res) => {
 
-    // const user = await User.create({ email, password });
+    // Get the data from the body
+    const { name, email, password } = req.body;
+
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+        res.status(400);
+        throw new Error('User Already Exists');
+    }
     
-    res.send('register user');
-}
+    const user = await User.create({
+        name,
+        email,
+        password
+    });
 
+    if (user) {
+        // Generate token
+        generateToken(res, user._id);
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        });
+    }
+
+})
 
 export {
     authUser,

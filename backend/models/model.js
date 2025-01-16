@@ -24,11 +24,16 @@ const userSchema = new mongoose.Schema({
     events: [eventSchema]
 });
 
-
+// Mehtod for comparing the password
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Hash the password before saving
+userSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt)
+})
 
 const Event = mongoose.model('Event', eventSchema);
 const User = mongoose.model('User', userSchema);
