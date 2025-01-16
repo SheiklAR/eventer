@@ -11,6 +11,7 @@ import App from './App.jsx'
 import HomeScreen from './screens/HomeScreen.jsx'
 import EventScreen from './screens/EventScreen.jsx'
 import LoginScreen from './screens/LoginScreen.jsx'
+import RegisterScreen from './screens/RegisterScreen.jsx'
 
 
 /**
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route index element={<HomeScreen />} />
       <Route path='/event/:id' element={<EventScreen />} />
       <Route path='/login' element={<LoginScreen />} />
+      <Route path='/register' element={<RegisterScreen />} />
     </Route>
   )
 )
