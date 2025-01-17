@@ -14,7 +14,7 @@ const Header = () => {
 
     // Navigation links can be dynamically updated if needed
     const navLinks = [
-        { path: '/create', label: 'Create Event' },
+        { path: '/createEvent', label: 'Create Event' },
         { path: '/login', label: 'Login' },
         { path: '/register', label: 'Register' },
     ];
@@ -62,7 +62,7 @@ const Header = () => {
     return (
         <header className='bg-sky-400 py-4 px-2 items-center mb-4 font-Poppins'>
             <nav className='max-w-6xl mx-auto flex justify-between items-center'>
-                <h1 className='font-bold text-3xl font-Playwrite text-black'>
+                <h1 className='font-bold text-3xl font-Playwrite text-black pr-4'>
                     <Link to='/'>Eventer</Link>
                 </h1>
                 <div className='flex space-x-2'>
@@ -76,6 +76,12 @@ const Header = () => {
                         </Link>
                     )) :
                         <div className="flex space-x-2 items-center justify-between">
+                            <Link
+                                className='text-white rounded-md font-bold text-sm hover:text-gray-100 transition'
+                                to="/createEvent"
+                            >
+                                Create Event
+                            </Link>
                             <Link
                                 className='px-2 py-1 bg-white rounded-md text-blue-500 font-semibold text-sm hover:text-blue-500 transition'
                             >

@@ -12,6 +12,7 @@ import HomeScreen from './screens/HomeScreen.jsx'
 import EventScreen from './screens/EventScreen.jsx'
 import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
+import CreateEventScreen from './screens/CreateEventScreen.jsx'
 
 
 /**
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/event/:id' element={<EventScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
+      <Route path='/createEvent' element={<CreateEventScreen />} />
     </Route>
   )
 )
