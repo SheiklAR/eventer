@@ -119,7 +119,7 @@ const NewEventForm = () => {
           <input
             type="time"
             name="time"
-            min={currentTime}
+            min={formData.date === today ? currentTime : ''}
             placeholder='Enter time'
             value={formData.time}
             autoComplete='on'

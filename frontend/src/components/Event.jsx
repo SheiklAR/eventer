@@ -1,9 +1,9 @@
 import React from 'react'
-import formatDateTime from '../utils/formatDateTime';
 
 
-const Event = ({image, name, datetime, category, description}) => {
-  const { date, time } = formatDateTime(datetime);
+const Event = ({image, name, date, time, category, description}) => {
+  // Change date to readable format
+  date = new Date(date).toISOString().split('T')[0]
 
   /* live click */
   const handleClick = () => { };
