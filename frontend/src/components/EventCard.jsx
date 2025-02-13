@@ -1,12 +1,15 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { formatDateTime } from '../utilities';
 
 
-const EventCard = ({ _id, image, name, datetime, category }) => {
+
+const EventCard = ({ _id, image, name, date, time, category }) => {
     const navigate = useNavigate();
-    const { date, time } = formatDateTime(datetime);
-   
+    // Const { date, time } = formatDateTime(datetime);
+    console.log(date, typeof (date));
+    // Covert string to data and ISO
+    const ISOdate = date ? new Date(date).toISOString().split("T")[0] : '';
+    
     const handleClick = () => {
         navigate(`/event/${_id}`);
     }
@@ -18,7 +21,7 @@ const EventCard = ({ _id, image, name, datetime, category }) => {
             <div className='p-4 font-Poppins'>
                 <h2 className='text-xl font-semibold mb-2 text-gray-800'>{name}</h2>
                 <div className='flex space-x-3 items-center justify-between'>
-                    <p className='text-gray-600'>Date: {date}</p>
+                    <p className='text-gray-600'>Date: {ISOdate}</p>
                     <p className='text-gray-600'>Time: {time}</p>
                 </div>
                 <div className='flex justify-between mt-3'>
@@ -31,6 +34,6 @@ const EventCard = ({ _id, image, name, datetime, category }) => {
             </div>
         </div>
     )
-}
+};
 
 export default EventCard

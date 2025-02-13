@@ -6,4 +6,5 @@ const formatDateTime = (datetime) => {
     return { date, time };
 };
 
-export { formatDateTime };
+
+export default formatDateTime;

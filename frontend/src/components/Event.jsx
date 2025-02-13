@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDateTime } from '../utilities';
+import formatDateTime from '../utils/formatDateTime';
 
 
 const Event = ({image, name, datetime, category, description}) => {

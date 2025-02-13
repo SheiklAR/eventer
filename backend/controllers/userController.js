@@ -7,7 +7,7 @@ import generateToken from "../utils/generateToken.js";
 // @desc   Authencticate User
 // @route  POST api/users/login
 // @access Public
-const authUser = async (req, res) => {
+const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     
     const user = await User.findOne({ email });
@@ -32,55 +32,58 @@ const authUser = async (req, res) => {
         res.send("User not found");
         
     }
-};
+});
 
 
 // @desc   Logout User and empty the cookie
 // @route  POST api/users/logout
 // @access PRIVATE
 const logOutUser = asyncHandler(async (req, res) => {
-    res.cookie('jwt', '', {
+    
+    res.cookie("jwt", "", {
         httpOnly: true,
-        expires: new Date(0)
+        expires: new Date(0),
+        secure: true,
+        sameSite: "Strict"
     })
 
-    res.status(200).json({ message: "Logged out" });
-})
+    res.status(200).json({ message: "logged out successfully, cookies deleted" });
+});
 
 
-
-// @desc   Register User
+// @desc   Register new user
 // @route  POST api/users/register
-// @access Private
+// @access PRIVATE
 const registerUser = asyncHandler(async (req, res) => {
-
-    // Get the data from the body
+    // extract data from the request body
     const { name, email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
+    const existingUser = await User.findOne({ email });
 
-    if (userExists) {
-        res.status(400);
-        res.send("User already exists");
+    // Check if we already have the user
+    if (existingUser) {
+        res.status(409).json({ 'message': 'User already exists, Login' });
     }
-    
-    const user = await User.create({
-        name,
-        email,
-        password
-    });
 
-    if (user) {
+    try {
+        // Create a new user
+        const user = await User.create({ name, email, password });
+
         // Generate token
         generateToken(res, user._id);
+
         res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email
-        });
+            'id': user._id,
+            'email': user.email,
+            'name': user.name
+        })
+            
+    } catch (err) {
+        res.status(400).json({ message: err.message || "User registeration failed" });
     }
 
-})
+});
+
 
 export {
     authUser,
