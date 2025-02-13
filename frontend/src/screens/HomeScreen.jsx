@@ -7,10 +7,33 @@ import DateFilter from '../components/DateFilter'
 
 // Renders the home screen with a grid of event cards.
 const HomeScreen = () => {
+  const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
 
+  
+  useEffect(() => {
+    let filteredEvents = allEvents;
+
+    if (categoryFilter) {
+      filteredEvents = filteredEvents.filter((event) => event.category.toLowerCase() === categoryFilter.label.toLowerCase());
+      setEvents(filteredEvents);
+    }
+    
+    if (dateFilter) {
+      filteredEvents = filteredEvents.filter((event) => event.date.split("T")[0].split("-")[1] === dateFilter.label)
+      setEvents(filteredEvents);
+    }
+    
+    if (!categoryFilter && !dateFilter) {
+      setEvents(allEvents);
+    } else {
+      setEvents(filteredEvents);
+    }
+
+  }, [categoryFilter, dateFilter, allEvents]);
+  
 
   useEffect(() => {
 
@@ -18,6 +41,7 @@ const HomeScreen = () => {
       try {
         const { data } = await axios.get('/api/events'); // Destructure `data` from response
         setEvents(data);
+        setAllEvents(data);
       } catch (error) {
         console.log('fetching error', error.message);
       }
