@@ -22,11 +22,11 @@ export default function CategoryFilter({ categoryFilter, setCategoryFilter }) {
       onChange={(event, value) => setCategoryFilter(value)}
       filterSelectedOptions
       size='small'
-      sx={{ width: 200 }}
+      sx={{ width: 150 }}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="category"
+          label="Category"
           placeholder="Select Category"
         />
       )}
