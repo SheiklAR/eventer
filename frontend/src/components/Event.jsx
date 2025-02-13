@@ -10,6 +10,7 @@ const Event = ({image, name, date, time, category, description}) => {
 
   return (
     <div className='max-w-lg mx-auto my-4 font-Poppins px-2 py-4 bg-white rounded-lg shadow-md'>
+      <h2 className='pb-2 font-Poppins font-bold text-2xl text-gray-700'>{ name }</h2>
       <img
         src={image}
         alt={`${name} image`}
