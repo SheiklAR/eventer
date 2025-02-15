@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
 
 
 
 const Event = ({ image, name, date, time, category, description }) => {
+  const [userInfo, setUserInfo] = useState(null);
   const [isLive, setIsLive] = useState(false);
   const [views, setViews] = useState(0);
   const [isAttending, setIsAttending] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false);
   const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const storedUserInfo = localStorage.userInfo ? JSON.parse(localStorage.userInfo) : null;
+    setUserInfo(storedUserInfo);
+    console.log(storedUserInfo);
+  }, [userInfo]);
+
+  const navigate = useNavigate();
 
   // Change date to readable format
   date = new Date(date).toISOString().split('T')[0]
@@ -26,7 +35,7 @@ const Event = ({ image, name, date, time, category, description }) => {
     const eventStart = new Date();
     eventStart.setHours(eventHours, eventMinutes, 0, 0);
 
-    const eventEnd = new Date(eventStart.getTime() + 30 * 60 * 1000);
+    const eventEnd = new Date(eventStart.getTime() + 60 * 60 * 1000);
     
     // Check if dates are same and with in the time limit
     if (date === currentDate && now >= eventStart && now <= eventEnd) {
@@ -94,6 +103,11 @@ const Event = ({ image, name, date, time, category, description }) => {
   
   /* live click */
   const handleAttend = () => {
+    // Check if logged in if not redirect to login
+    if (!userInfo) {
+      navigate('/login');
+    };
+
     if (socket) {
       socket.emit('joinLive');
       setIsAttending(true);

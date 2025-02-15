@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import checkAuth from '../utils/checkAuth';
 import NewEventForm from '../components/NewEventForm';
@@ -15,15 +16,20 @@ event category
 event image
 */
 const CreateEventScreen = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const userInfo = localStorage.getItem('userInfo');
 
-  const navigate = useNavigate()
+  console.log('uer', userInfo)
+  console.log(userInfo === 'null');
+  if (userInfo == null) {
+    console.log('here')
+    return <Navigate to="/login" replace />;
+  }
 
 
   // Check for authorization
-  useEffect(() => {
-    checkAuth(setIsAuthorized, navigate)
-  }, []);
+  // useEffect(() => {
+  //   checkAuth(setIsAuthorized, navigate)
+  // }, []);
   
 
   return (

@@ -43,21 +43,34 @@ const Header = () => {
     const handleClick = async (e) => {
         e.preventDefault()
         alert('You will be logged out');
-        try {
-            // Clear the cookie
-            await axios.post('/api/users/logout');
-            // Clear the local storage
-            localStorage.setItem('userInfo', null);
-    
-            navigate('/login');
 
+        const isGuest = localStorage.getItem('isGuest') === 'true';
+
+        
+        if (!isGuest) {
+            try {
+                // Clear the cookie
+                await axios.post('/api/users/logout');
+                // Clear the local storage
+                localStorage.removeItem('userInfo', null);
+        
+                navigate('/');
+    
+                // Refresh
+                window.location.reload();
+    
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            // Clear the local storage
+            localStorage.removeItem('isGuest', null);
+            localStorage.removeItem('userInfo', null);
             // Refresh
             window.location.reload();
-
-        } catch (error) {
-            console.log(error);
+            navigate('/');
         }
-    }
+    };
 
     return (
         <header className='bg-sky-400 py-4 px-2 items-center mb-4 font-Poppins'>
