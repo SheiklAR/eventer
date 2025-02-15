@@ -22,10 +22,10 @@ connectWebSocket(server);
 // cookie-parser middleware
 app.use(cookieParser())
 
-// Root Endpoint
-app.get('/', (req, res) => {
-    res.send("Api is running...");
-});
+// // Root Endpoint
+// app.get('/', (req, res) => {
+//     res.send("Api is running...");
+// });
 
 app.use('/api/events', eventRouter);
 app.use('/api/users', userRouter);
@@ -45,6 +45,11 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) =>
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
     )
+} else {
+    // Root Endpoint
+    app.get('/', (req, res) => {
+        res.send("Api is running...");
+    });
 };
 
 // Start Server
