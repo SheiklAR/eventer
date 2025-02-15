@@ -12,7 +12,7 @@ const EventCard = ({ _id, image, name, date, time, category }) => {
 
 
     useEffect(() => {
-        if (checkLive(date, time, ISOdate)) {
+        if (checkLive(date, time, new Date())) {
             setIsLive(true)
         } else {
             setIsLive(false)

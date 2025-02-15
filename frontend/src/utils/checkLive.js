@@ -5,6 +5,8 @@ const checkLive = (date, time, currentDate) => {
     const eventDate = new Date(date).toISOString().split("T")[0]; 
     const todayDate = new Date(currentDate).toISOString().split("T")[0];
 
+    console.log(eventDate, todayDate);
+
     if (eventDate !== todayDate) return false; // If not the same day, return false
 
     // Extract event time
