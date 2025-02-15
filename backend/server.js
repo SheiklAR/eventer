@@ -30,10 +30,7 @@ app.use(cookieParser())
 app.use('/api/events', eventRouter);
 app.use('/api/users', userRouter);
 
-// 404 Error Handling
-app.use((req, res, next) => {
-    res.status(404).send({ message: "Endpoint not found" });
-});
+
 
 const __dirname = path.resolve();
 
@@ -52,6 +49,11 @@ if (process.env.NODE_ENV === 'production') {
     });
 };
 
+
+// 404 Error Handling
+app.use((req, res, next) => {
+    res.status(404).send({ message: "Endpoint not found" });
+});
 // Start Server
 // app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
