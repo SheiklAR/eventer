@@ -15,8 +15,8 @@ const Event = ({ image, name, date, time, category, description }) => {
   useEffect(() => {
     const storedUserInfo = localStorage.userInfo ? JSON.parse(localStorage.userInfo) : null;
     setUserInfo(storedUserInfo);
-    console.log(storedUserInfo);
-  }, [userInfo]);
+    // console.log(storedUserInfo);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const Event = ({ image, name, date, time, category, description }) => {
   }, [date, time]);
 
 
-  // Make a connection to the server web socket
+  // Make a connection to the server web socket if live
   useEffect(() => {
     
     if (isLive) {

@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import checkLive from '../utils/checkLive';
 
 
 
 const EventCard = ({ _id, image, name, date, time, category }) => {
+    const [isLive, setIsLive] = useState(false);
     const navigate = useNavigate();
-    // Const { date, time } = formatDateTime(datetime);
-    console.log(date, typeof (date));
     // Covert string to data and ISO
-    const ISOdate = date ? new Date(date).toISOString().split("T")[0] : '';
+    const ISOdate = new Date(date).toISOString().split("T")[0];
+
+
+    useEffect(() => {
+        if (checkLive(date, time, ISOdate)) {
+            setIsLive(true)
+        } else {
+            setIsLive(false)
+        }
+    }, [date, time, ISOdate])
     
     const handleClick = () => {
         navigate(`/event/${_id}`);
@@ -19,7 +28,11 @@ const EventCard = ({ _id, image, name, date, time, category }) => {
             <img src={image} alt="" className='w-full overflow-hidden' />
           
             <div className='p-4 font-Poppins'>
-                <h2 className='text-xl font-semibold mb-2 text-gray-800'>{name}</h2>
+                <div className='flex mb-2 items-center justify-between'>
+                    <h2 className='text-xl font-semibold text-gray-800'>{name}</h2>
+                    {/* Live badge */}
+                    {isLive && <span className='px-3 py-2 bg-red-500 text-white text-xs rounded-lg font-semibold'>Live</span>}
+                </div>
                 <div className='flex space-x-3 items-center justify-between'>
                     <p className='text-gray-600'>Date: {ISOdate}</p>
                     <p className='text-gray-600'>Time: {time}</p>
@@ -36,4 +49,4 @@ const EventCard = ({ _id, image, name, date, time, category }) => {
     )
 };
 
-export default EventCard
+export default EventCard;
