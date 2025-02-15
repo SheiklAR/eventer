@@ -65,7 +65,7 @@ const NewEventForm = () => {
         </label>
         <label className=''>
           Category
-          <input
+          {/* <input
             type="category"
             name="category"
             placeholder='Enter category'
@@ -74,7 +74,22 @@ const NewEventForm = () => {
             onChange={handleChange}
             required
             className='block w-full font-light text-sm px-2 py-2 my-1 rounded-sm text-black mb-6 border-2'
-          />
+          /> */}
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+            className='block w-full font-light text-sm px-2 py-2 my-1 rounded-sm text-black mb-6 border-2'
+          >
+            <option value="" disabled>Select a category</option>
+            <option value="Tech & Science">Tech & Science</option>
+            <option value="Cooking">Cooking</option>
+            <option value="Design">Design</option>
+            <option value="Gaming">Gaming</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Motivation">Motivation</option>
+          </select>
         </label>
         <label className=''>
           Image
@@ -133,7 +148,7 @@ const NewEventForm = () => {
           type="submit"
           disabled={loading}
           className='px-3 py-2 mt-4 bg-green-400 text-white text-xs rounded-lg font-semibold hover:bg-green-600 active:scale-105 duration-100 transition'
-        >{ loading ? 'wait...' : 'create event' }</button>
+        >{loading ? 'wait...' : 'create event'}</button>
     
       </form>
     

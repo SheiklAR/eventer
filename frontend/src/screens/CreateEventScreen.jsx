@@ -18,19 +18,11 @@ event image
 const CreateEventScreen = () => {
   const userInfo = localStorage.getItem('userInfo');
 
-  console.log('uer', userInfo)
-  console.log(userInfo === 'null');
   if (userInfo == null) {
     console.log('here')
     return <Navigate to="/login" replace />;
   }
 
-
-  // Check for authorization
-  // useEffect(() => {
-  //   checkAuth(setIsAuthorized, navigate)
-  // }, []);
-  
 
   return (
     <NewEventForm />
