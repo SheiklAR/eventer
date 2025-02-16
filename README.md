@@ -7,7 +7,7 @@ The Event Management Platform is a full-stack web application that allows users 
 ### Access the Platform
 Visit the deployed version of the platform using the following link:
 https://eventer-y7eo.onrender.com
-(please keep patientce, it opens slowly)
+(please keep patientce, it's free Render free tier and opens slowly)
 
 ### Features and Usage
 #### 1. Home Page
@@ -22,7 +22,7 @@ https://eventer-y7eo.onrender.com
 - Users must be logged in to create an event.
 - You can either register a new account or log in with an existing user.
 - credentials for login:
-  - Email: user@gmail.com
+  - Email: user1@gmail.com
   - Password: 123456
 - Click on the "Create Event" button to access the event form.
 - After entering name, image(jpg format) and stuff, choose the current date and time to start a live event immediately.
