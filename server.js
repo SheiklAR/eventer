@@ -19,6 +19,8 @@ const server = createServer(app); // Add the server to the websocket server
 // Web Socket Conn
 connectWebSocket(server);
 
+// json parser
+app.use(express.json());
 // cookie-parser middleware
 app.use(cookieParser())
 
