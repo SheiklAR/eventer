@@ -7,7 +7,7 @@ The Event Management Platform is a full-stack web application that allows users 
 ### Access the Platform
 Visit the deployed version of the platform using the following link:
 https://eventer-y7eo.onrender.com
-(please keep patientce, it's free Render free tier and opens slowly)
+(please keep patientce, it's Render free tier and opens slowly)
 
 ### Features and Usage
 #### 1. Home Page
